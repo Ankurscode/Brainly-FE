@@ -5,6 +5,7 @@ import './App.css'
 import { Button } from './component/Button'
 import { ShareIcon } from './icons/ShareIcon'
 import { PluseIcon } from './icons/PlusIcon'
+import { Card } from './component/Card'
 
 function App() {
  
@@ -13,7 +14,8 @@ function App() {
     <>
      
       <Button varients='primery' satrtIcon={<PluseIcon size='lg'/>} text='Add contenct'></Button>
-      <Button varients='secondary' satrtIcon={<ShareIcon size='lg'/>}  text='Share brain'></Button>  
+      <Button varients='secondary' satrtIcon={<ShareIcon size='lg'/>}  text='Share brain'></Button> 
+      <Card/> 
           
     </>
   )
