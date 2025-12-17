@@ -1,24 +1,12 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-import { Button } from './component/Button'
-import { ShareIcon } from './icons/ShareIcon'
-import { PluseIcon } from './icons/PlusIcon'
-import { Card } from './component/Card'
+import Dashboard from "./pages/Dashboard"
+import { SignUp } from "./pages/SignUp"
 
 function App() {
- 
 
-  return (
-    <>
-     
-      <Button varients='primery' satrtIcon={<PluseIcon size='lg'/>} text='Add contenct'></Button>
-      <Button varients='secondary' satrtIcon={<ShareIcon size='lg'/>}  text='Share brain'></Button> 
-      <Card/> 
-          
-    </>
-  )
+
+  return(
+    <SignUp/>
+  ) 
 }
 
 export default App

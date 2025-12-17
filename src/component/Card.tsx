@@ -1,8 +1,13 @@
 import { ShareIcon } from "../icons/ShareIcon"
 
- const defaultStyle="p-4     bg-white rounded-md border-gray-300 max-w-72 border"
+ const defaultStyle="p-4     bg-white rounded-md border-gray-300 max-w-72 border min-h-48 min-w-72"
+ interface CardProps{
+    title:string;
+    link:string;
+    type:"Youtube"|"Twitter"
+ }
 
-export const Card=()=>{
+export const Card=(props:CardProps)=>{
     return <div > 
             <div className={`${defaultStyle}`}>
                 <div className="flex justify-between">
@@ -10,7 +15,7 @@ export const Card=()=>{
                         <div className="text-gray-500 pr-2">
                             <ShareIcon size="md"/>
                         </div>
-                        Project Ideas
+                        {props.title}
                     </div>
                 
                     <div className="flex items-center">
@@ -18,18 +23,20 @@ export const Card=()=>{
                             <ShareIcon size="md"/>
                         </div>
                         <div className="text-gray-500">
+                            <a href={props.link}></a>
                             <ShareIcon size="md"/>
                         </div>
                     </div>
                 </div>
                 <div className="pt-4">
-                {/* <iframe className="w-full" src="https://www.youtube.com/embed/okh85F29Gjg?si=mRgoElEbAnOVvxrM" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen></iframe>
-                 */}
+                    {props.type==="Youtube"&&<iframe className="w-full" src={props.link.replace("watch","embed").replace("?v=","/")} title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen></iframe>}
+                
+                {props.type==="Twitter"&&<blockquote className="twitter-tweet"> <a href={props.link.replace("x.com","twitter.com")}></a></blockquote> }
 
-                 {/* <blockquote className="twitter-tweet"><p lang="en" dir="ltr">be honest.. which one&#39;s best for backend? <a href="https://t.co/ruJRKU0oVH">pic.twitter.com/ruJRKU0oVH</a></p>&mdash; JNS (@_devJNS) <a href="https://twitter.com/_devJNS/status/1999757544282259874?ref_src=twsrc%5Etfw">December 13, 2025</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charSet="utf-8"></script>
-                </div> */}
+                 
                
-                 <iframe className="w-full" src="https://s1.papyruspub.com/files/demos/products/ebooks/novels/science-fiction/Preview-Project-Hail-Mary-by-Andy-Weir.pdf"></iframe>
+               
+                 
             </div>
             
             
