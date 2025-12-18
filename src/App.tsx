@@ -6,14 +6,11 @@ function App() {
   
   return <BrowserRouter>
   <Routes>
-    <Route path="/signUp" element={<SignUp/>}/>
+    <Route path="/" element={<SignUp/>}/>
     <Route path="/signIn" element={<SignIn/>}/>
     <Route path="/Dashboard" element={<Dashboard/>}/>
   </Routes>
-  
   </BrowserRouter>
-  
- 
 }
 
 export default App
