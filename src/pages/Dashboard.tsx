@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import { Button } from '../component/Button'
 import { ShareIcon } from '../icons/ShareIcon'
@@ -7,9 +7,32 @@ import { Card } from '../component/Card'
 import { TwitterIcon } from '../icons/TwitterIcon'
 import { CreateContentModel } from '../component/CreateContentModel'
 import { Sidebar } from '../component/Sidebar'
+import { useContent } from '../hooks/useContent'
+import axios from 'axios'
+import { BASE_URL } from '../config'
 
 function Dashboard() {
 const [modelOpen,setModelOpen]=useState(false);
+const {contents,effects}=useContent();
+
+useEffect(()=>{
+  effects();
+},[modelOpen])
+
+async function shareContent(){
+ const response= await axios.post(`${BASE_URL}/api/v1/brain/share`,{
+    share:true
+  },{
+    headers:{
+      "Authorization":localStorage.getItem("token")
+    }
+  })
+    const shareUrl=`http://localhost:5173/${response.data.hash}`
+  alert(shareUrl)
+  
+
+}
+
 
   return (
     <div>
@@ -21,13 +44,14 @@ const [modelOpen,setModelOpen]=useState(false);
 
     <div className='flex justify-end gap-4 '>
    <Button onClick={()=>{setModelOpen(true)}} varients='primery' text='Add content' satrtIcon={<PluseIcon size='md'/>}/>
-    <Button  varients='secondary' text='Share' satrtIcon={<ShareIcon size='md'/>}/>
+    <Button onClick={shareContent} varients='secondary' text='Share' satrtIcon={<ShareIcon size='md'/>}/>
     
     </div>
  
-    <div className='flex gap-4'>
-      <Card title='YouterBanney' link='https://www.youtube.com/watch?v=aKPaxQJs-30' type='Youtube'/>
-             <Card title='TwitterBanayney' link='https://x.com/_isha_here/status/2000511400633057357?s=20' type='Twitter'/>
+    <div className='flex gap-4 flex-wrap'>
+      {contents.map(({title,link,type})=> <Card title={title} link={link} type={type}/>)}
+     
+            
     </div>
     
 

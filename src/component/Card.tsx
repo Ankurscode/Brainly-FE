@@ -7,6 +7,8 @@ import { ShareIcon } from "../icons/ShareIcon"
     type:"Youtube"|"Twitter"
  }
 
+ 
+
 export const Card=(props:CardProps)=>{
     return <div > 
             <div className={`${defaultStyle}`}>
@@ -18,14 +20,17 @@ export const Card=(props:CardProps)=>{
                         {props.title}
                     </div>
                 
-                    <div className="flex items-center">
-                        <div className="pr-2 text-gray-500">
-                            <ShareIcon size="md"/>
-                        </div>
+                    <div className="flex gap-3 items-center">
                         <div className="text-gray-500">
-                            <a href={props.link}></a>
                             <ShareIcon size="md"/>
                         </div>
+
+                        <div className="text-gray-500">
+                            <a href={props.link}>
+                            <ShareIcon size="md"/>
+                            </a>
+                        </div>
+                       
                     </div>
                 </div>
                 <div className="pt-4">

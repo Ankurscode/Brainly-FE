@@ -1,4 +1,5 @@
 import type { ReactElement } from "react"
+import Loading from "../icons/LoadingIcon"
 
 interface ButtonPropo{
     varients:"primery"|"secondary",
@@ -8,6 +9,7 @@ interface ButtonPropo{
     // size:"sm"|"md"|"lg"
     onClick?:()=>void;
     fullWidth?:boolean
+    loading?:boolean
 }
 
 const varientStyle={
@@ -26,7 +28,7 @@ const defaultStyling=" px-7 py-2 rounded-md flex items-center font-light"
 
 
 export const Button=(props:ButtonPropo)=>{
-    return <button  onClick={props.onClick} className={`${varientStyle[props.varients]} </div>:null} ${defaultStyling}} ${props.fullWidth ?" w-full flex justify-center items-center":""} `}><div className="pr-2">
+    return <button  onClick={props.onClick} className={`${varientStyle[props.varients]} </div>:null} ${defaultStyling}} ${props.fullWidth ?" w-full flex justify-center items-center":""} ${props.loading ? "opacity-45":""}`}  disabled={props.loading}><div className="pr-2">
         {props.satrtIcon}
         </div> 
         {props.text}
