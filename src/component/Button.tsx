@@ -1,5 +1,5 @@
 import type { ReactElement } from "react"
-import Loading from "../icons/LoadingIcon"
+
 
 interface ButtonPropo{
     varients:"primery"|"secondary",

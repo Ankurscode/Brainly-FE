@@ -1,11 +1,11 @@
 import axios from "axios"
-import { DeleteIcon } from "../icons/DeleteIcon"
-import { ShareIcon } from "../icons/ShareIcon"
+import { DeleteIcon } from "../../icons/DeleteIcon"
+import { ShareIcon } from "../../icons/ShareIcon"
 
 import {format} from "date-fns"
 import   { useEffect, useState }  from "react"
-import { YoutubeIcon } from "../icons/YoutubeIcon"
-import { NotionIcon } from "../icons/NotionIcon"
+import { YoutubeIcon } from "../../icons/YoutubeIcon"
+import { NotionIcon } from "../../icons/NotionIcon"
 import Tags from "./Tags"
 
 
