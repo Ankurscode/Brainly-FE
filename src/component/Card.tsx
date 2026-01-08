@@ -1,9 +1,9 @@
 import axios from "axios"
 import { DeleteIcon } from "../icons/DeleteIcon"
 import { ShareIcon } from "../icons/ShareIcon"
-import { TwitterIcon } from "../icons/TwitterIcon"
+
 import {format} from "date-fns"
-import  JSX, { useEffect, useState }  from "react"
+import   { useEffect, useState }  from "react"
 import { YoutubeIcon } from "../icons/YoutubeIcon"
 import { NotionIcon } from "../icons/NotionIcon"
 import Tags from "./Tags"
