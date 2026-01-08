@@ -1,16 +1,14 @@
-import Dashboard from "./pages/Dashboard"
-import { SignIn } from "./pages/SignIn"
-import { SignUp } from "./pages/SignUp"
-import {BrowserRouter,Route,Routes,useNavigate} from "react-router-dom"
+
+import { Card } from "./component/Card"
+
+
 function App() {
-  
-  return <BrowserRouter>
-  <Routes>
-    <Route path="/" element={<SignUp/>}/>
-    <Route path="/signIn" element={<SignIn/>}/>
-    <Route path="/Dashboard" element={<Dashboard/>}/>
-  </Routes>
-  </BrowserRouter>
+
+
+  return(
+    <Card title={"Hello title12345"} icon="Notion"  link="https://www.notion.so/AVL-Tree-2dc2debcdccd8065bb55e0dbe813fe87?source=copy_link" tag="Inspiration"></Card>
+  ) 
+
 }
 
 export default App
