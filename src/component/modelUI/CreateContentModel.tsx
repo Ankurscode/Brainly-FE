@@ -53,18 +53,13 @@ export const Model=(props:{onClick:()=>void,setModel:(value:boolean)=>void,setRe
 
     return (
     <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4 z-50 animate-in fade-in duration-200">
+      <div ref={modRef} onClick={props.onClick} className="absolute inset-0 bg-black bg-opacity-50"></div>
       <div className="bg-white rounded-2xl shadow-2xl max-w-lg w-full p-8 relative animate-in zoom-in-95 duration-200">
-        
         <button
           onClick={props.onClick}
-          className="absolute top-6 right-6 text-gray-400 hover:text-gray-700 hover:bg-gray-100 rounded-full p-1.5 transition-all"
-        >
-          
-          <CrossIcon />
-          
+          className="absolute top-6 right-6 text-gray-400 hover:text-gray-700 hover:bg-gray-100 rounded-full p-1.5 transition-all" > 
+          <CrossIcon />  
         </button>
-
-        
         <div className="mb-8 flex justify-center items-center">
           <h2 className="font-bold text-3xl bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Add Content</h2>
           {/* <p className="text-gray-500 text-sm mt-1">Save and organize your favorite content</p> */}
@@ -148,4 +143,7 @@ export const Model=(props:{onClick:()=>void,setModel:(value:boolean)=>void,setRe
     </div>
   );
 };
+
+
+
 
