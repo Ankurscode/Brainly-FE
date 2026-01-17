@@ -1,6 +1,33 @@
-import {Brain,Sparkles,ArrowRight} from "lucide-react"
+import {Brain,Sparkles,ArrowRight,BookmarkPlus, Search,Zap, Share2} from "lucide-react"
 import { Button } from "../component/button/Button"
-export const LangPage=()=>{
+import {FeatureCard} from "../component/card/featureCard"
+
+interface LangPageProps{
+    onGetStart:()=>void;
+}
+export const LangPage=({onGetStart}:LangPageProps)=>{
+    const features=[
+        {
+            icon:BookmarkPlus,
+            title:'Capture Everthing',
+            description:"Save content from Youtube, Twitter, and Notion in one place. Never lose track of valuable information again."
+        },
+        {
+            icon:Search,
+            title:'Find Instantly',
+            description:"Powerful search and filtering to find exactly what you need, when you need it. Your knowledge at your fingertips."
+        },
+        {
+            icon:Zap,
+            title:"Organize Effortlessly",
+            description:"Smart tags and categories automatically organize your content. Spend less time organizing, more time learning."
+        },
+        {
+            icon:Share2,
+            title:'Connect Ideas',
+            description:'Link related content and build a network of knowledge. Transform scattered information into insights.'
+        }
+    ]
     return(
         <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50/30 to-purple-50/30 ">
             <nav className="container mx-auto px-6 py-6">
@@ -89,26 +116,43 @@ export const LangPage=()=>{
                         </p>
                         
                     </div>
+                  <div className="grid md:grid-cols-2 gap-8">
+                    {features.map((features,index)=>(
+                        <FeatureCard
+                            key={index}
+                            icon={features.icon}
+                            title={features.title}
+                            description={features.description}
+
+                        />
+                    ))}
+                  </div>
                 </div>
+                
             </section>
 
-             {/* <section className="container mx-auto px-6 py-24">
+            <section className="container mx-auto px-6 py-24">
                 <div className="max-w-4xl mx-auto">
-                    <div className="realtive">
-                        <div className="absolute inset-0 bg-gradient-to-r from-blue-500 to-purple-600 rounded-3xl blur-2xl opacity-20"> </div>
-                        <div className="realtive bg-greadient-to-br form-blue-600 to-purple-600 rounded-3xl p-12 md:p-16 text-center shadow-2xl">
-                            <h2 className="text-4xl md:text-5xl font-bold text-white mn-6">
-                                Ready to build your Second Brain?
+                    <div className="relative">
+                        <div className="absolute inset-0 bg-gradient-to-r from-blue-500 to-purple-600 rounded-3xl blur-2xl opacity-20"></div>
+                        <div className="relative bg-gradient-to-br from-blue-600 to-purple-600 rounded-3xl p-12 md:p-16 text-center shadow-2xl">
+                            <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
+                              Ready to build your Second Brain?
                             </h2>
-                            <p className="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
-                                Join thousands of people who are organizing
-                                 their knowledge and unlocking their potential.
+                             <p className="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
+                                Join thousands of people who are organizing their knowledge and unlocking their potential.
                             </p>
-                            <Button varients="primery" text="Get Started for free"/>
+                            <Button varients="primery" text=" Get Started for Free" />
                         </div>
                     </div>
-                </div>
-            </section> */}
+                </div>     
+            </section>
+             <footer className="container mx-auto px-6 py-12 border-t border-gray-200/50">
+               <div className="text-center text-gray-600">
+                <p>© 2026 Second Brain. Built for knowledge enthusiasts.</p>
+               </div>
+            </footer>
+            
         </div>
     )
 }
