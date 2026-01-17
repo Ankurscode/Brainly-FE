@@ -4,24 +4,37 @@ import { AllIcon } from "../../icons/All";
 import { YoutubeIcon } from "../../icons/YoutubeIcon";
 import { TwitterIcon } from "../../icons/TwitterIcon";
 import { NotionIcon2 } from "../../icons/Notions2";
-import { useState } from "react";
+import { useState, type ComponentType, type SVGProps } from "react";
+
+
+interface ContentTypes{
+    contentType:"Youtube"|"Twitter"|"Notion";
+}
 
 
 interface SideNavbarProps{
-    data:any,
-    setData:any,
-    setYTData:any,
-    setTwitterData:any,
-    setNotionData:any,
-    setDataShow:any
+    data:ContentTypes[],
+    setData:(data:ContentTypes[])=>void,
+    setYTData:(data:ContentTypes[])=>void,
+    setTwitterData:(data:ContentTypes[])=>void,
+    setNotionData:(data:ContentTypes[])=>void,
+    setDataShow:(type:string)=>void
 }
 
-const menuItems=[
-    {id:"all", label:"All" ,icon:<AllIcon/>},
-    {id:"youtube",label:"Youtube",icon:<YoutubeIcon/>},
-    {id:"twitter",label:"Twitter",icon:<TwitterIcon/>},
-    {id:"notion",label:"Notion",icon:<NotionIcon2/>}
-]
+
+type IconType = ComponentType<SVGProps<SVGSVGElement>>;
+const menuItems: {
+  id: string;
+  label: string;
+  icon: IconType;
+}[] = [
+  { id: "all", label: "All", icon: AllIcon },
+  { id: "youtube", label: "Youtube", icon: YoutubeIcon },
+  { id: "twitter", label: "Twitter", icon: TwitterIcon },
+  { id: "notion", label: "Notion", icon: NotionIcon2 },
+];
+
+
 
 
 export const SideNav=(props:SideNavbarProps)=>{
@@ -31,42 +44,98 @@ export const SideNav=(props:SideNavbarProps)=>{
         setActiveItem("all")
     }
     function yt(){
-        const ytData=props.data.filter((item:any)=>item.contentType==="Youtube");
+        
+        const ytData=(props.data??[]).filter((item:any)=>item.contentType==="Youtube");
         props.setYTData(ytData)
         props.setDataShow("Youtube")
         setActiveItem("youtube")
     }
     function tw(){
+        
         const twitterData=props.data.filter((item:any)=>item.contentType==="Twitter")
         props.setTwitterData(twitterData)
         props.setDataShow("Twitter")
         setActiveItem("twitter")
     }
     function no(){
+        
         const notionData=props.data.filter((item:any)=>item.contentType==="Notion")
         props.setNotionData(notionData)
         props.setDataShow("Notion")
         setActiveItem("notion")
     }
+    const handlers={
+        all:all,
+        youtube:yt,
+        twitter:tw,
+        notion:no
+    }
     return <>
     <div className="w-64 h-screen bg-gradient-to-b from-slate-50 to-white border-r border-gray-200/80 shadow-sm flex flex-col">
        <div className="p-6 border-b border-gray-200/80">
-        <div className="flex items-center justify-center">
-            <div className="relative">
-                <div className="absolute inset-0 bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl blur-xl opacity-20"></div>
-                <div className="relative bg-gradient-to-br from-blue-600 to-purple-600 p-3 rounded-2xl shadow-lg">
-                <AppLogo/>
+            <div className="flex items-center justify-center">
+                 <div className="relative">
+                     <div className="absolute inset-0 bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl blur-xl opacity-20"></div>
+                    <div className="relative bg-gradient-to-br from-blue-600 to-purple-600 p-3 rounded-2xl shadow-lg">
+                        <AppLogo />
+                    </div>
                 </div>
-            </div>
-        </div>
+         </div>
        </div>
-        <div>
-
-            <div onClick={all}><NavFiels text={"All"} sartIcon={<AllIcon/>}/></div>
-            <div onClick={yt}><NavFiels text={"Youtube"} sartIcon={<YoutubeIcon/>}/></div>
-            <div onClick={tw}><NavFiels text={"Twitter"} sartIcon={<TwitterIcon/>}/></div>
-            <div onClick={no}><NavFiels text={"Notion"} sartIcon={<NotionIcon2/>}/></div>
+       <nav className="flex-1 px-4 py-6 space-y-2">
+        {menuItems.map((item)=>{
+            const isActive=activeItem===item.id;
+            const Icon=item.icon;
+            const handelCheck=handlers[item.id as keyof typeof handlers]
+            return(
+                <button key={item.id} onClick={handelCheck} className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200 group relative overflow-hidden ${isActive?"bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-lg shadow-blue-500/30":"text-gray-700 hover:bg-gray-100"}`}>
+               {!isActive &&(
+                <div className="absolute inset-0 bg-gradient-to-r from-blue-50 to-purple-50 opacity-0 group-hover:opacity-100 transition-opacity duration-200"></div>
+               )}  
+              <div className="relative z-10">
+                {Icon ? (
+                  <Icon
+                    className={`w-5 h-5 ${
+                      isActive
+                        ? 'text-white'
+                        : 'text-gray-700 group-hover:text-blue-600'
+                    }`}
+                  />
+                ) : (
+                  // Custom Notion Icon
+                  <svg
+                    className={`w-5 h-5 ${
+                      isActive
+                        ? 'text-white'
+                        : 'text-gray-700 group-hover:text-blue-600'
+                    }`}
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                  >
+                    <path d="M4.459 4.208c.746.606 1.026.56 2.428.466l13.215-.793c.28 0 .047-.28-.046-.326L17.86 1.968c-.42-.326-.981-.7-2.055-.607L3.01 2.295c-.466.046-.56.28-.374.466zm.793 3.08v13.904c0 .747.373 1.027 1.214.98l14.523-.84c.841-.046.935-.56.935-1.167V6.354c0-.606-.233-.933-.748-.887l-15.177.887c-.56.047-.747.327-.747.933zm14.337.745c.093.42 0 .84-.42.888l-.7.14v10.264c-.608.327-1.168.514-1.635.514-.748 0-.935-.234-1.495-.933l-4.577-7.186v6.952L12.21 19s0 .84-1.168.84l-3.222.186c-.093-.186 0-.653.327-.746l.84-.233V9.854L7.822 9.76c-.094-.42.14-1.026.793-1.073l3.456-.233 4.764 7.279v-6.44l-1.215-.139c-.093-.514.28-.887.747-.933zM1.936 1.035l13.31-.98c1.634-.14 2.055-.047 3.082.7l4.249 2.986c.7.513.934.653.934 1.213v16.378c0 1.026-.373 1.634-1.68 1.726l-15.458.934c-.98.047-1.448-.093-1.962-.747l-3.129-4.06c-.56-.747-.793-1.306-.793-1.96V2.667c0-.839.374-1.54 1.447-1.632z" />
+                  </svg>
+                )}
+              </div>
+              <span
+              className={`relative z-10 font-medium ${
+                isActive?'text-white':'text-gray-700 group-hover:text-gray-900'
+              }`}
+              >
+                {item.label}
+              </span>
+               {isActive && (
+                <div className="absolute right-3 w-1.5 h-1.5 bg-white rounded-full"></div>
+              )}
+                </button>
+            )
+        })}
+       </nav>
+       <div className="p-4 border-t border-gray-200/80">
+        <div className="text-center text-xs text-gray-400">
+          Content Manager
         </div>
+      </div>
+      
 
     </div>
     </>

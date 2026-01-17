@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react'
 
-import { Button } from '../component/Button'
+import { Button } from '../component/button/Button'
 import { ShareIcon } from '../icons/ShareIcon'
 import { PluseIcon } from '../icons/PlusIcon'
 import { Card } from '../component/card/Card'
 import { TwitterIcon } from '../icons/TwitterIcon'
-import { CreateContentModel } from '../component/CreateContentModel'
-import { Sidebar } from '../component/Sidebar'
+import { Model } from '../component/modelUI/CreateContentModel'
+import { SideNav } from '../component/SideNavbar/SideNav'
 import { useContent } from '../hooks/useContent'
 import axios from 'axios'
 import { BASE_URL } from '../config'
@@ -36,9 +36,9 @@ async function shareContent(){
 
   return (
     <div>
-      <Sidebar/>
+      <SideNav />
       <div className='p-4 ml-72 min-h-screen bg-gray-300 border-2'>
-      <CreateContentModel open={modelOpen} onClose={()=>{
+      <Model onClick={} onClose={()=>{
         setModelOpen(false)
       }}/>
 

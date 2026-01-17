@@ -1,6 +1,6 @@
 import { useRef } from "react";
-import { Button } from "../component/Button";
-import { Input } from "../component/Input";
+import { Button } from "../component/button/Button";
+import { Input } from "../component/input/Input";
 import { TitleIcon } from "../icons/TitileIcon";
 import axios from "axios";
 import { BASE_URL } from "../config";
